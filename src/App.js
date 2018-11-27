@@ -1,24 +1,20 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+/*eslint no-console: ["error", { allow: ["error", "log"] }] */
+import React from "react";
+import Entry from "./components/Entry.js";
+import ScaleUI from "./components/ScaleUI";
+import ReportGenerator from "./components/ReportGenerator";
+import { Route, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "./store";
 
-const {app} = window.require('electron').remote;
-
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>React + Electron = <span role="img" aria-label="love">😍</span></h2>
-        </div>
-        <p className="App-intro">
-          <b> Release 0.2.7 </b>
-          Version: {app.getVersion()}
-        </p>
-      </div>
-    );
-  }
-}
+const App = () => (
+  <Provider store={store}>
+    <Switch>
+      <Route exact path="/" component={Entry} />
+      <Route exact path="/scaleUI" component={ScaleUI} />
+      <Route exact path="/report" component={ReportGenerator} />
+    </Switch>
+  </Provider>
+);
 
 export default App;
